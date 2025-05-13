@@ -120,7 +120,8 @@ class InsightsClient(object):
             else:
                 raise ConnectionError("%s: %s" % (response.status_code, response.reason))
         except ConnectionError as e:
-            logger.warning("Unable to fetch egg url %s: %s. Defaulting to /release", url, str(e))
+            error_message = e.message
+            logger.warning("Unable to fetch egg url %s: %s. Defaulting to /release", url, str(error_message))
             return '/release'
 
     def fetch(self, force=False):
